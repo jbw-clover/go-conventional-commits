@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/joselitofilho/go-conventional-commits/internal/conventionalcommits"
-	"github.com/joselitofilho/go-conventional-commits/internal/transformers"
+	"github.com/joselitofilho/go-conventional-commits/pkg/conventionalcommits"
+	"github.com/joselitofilho/go-conventional-commits/pkg/transformers"
 )
 
 func TestTransforms_ConventionalCommit(t *testing.T) {

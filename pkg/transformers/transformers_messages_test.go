@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/tsuyoshiwada/go-gitlog"
 
-	"github.com/joselitofilho/go-conventional-commits/internal/transformers"
+	"github.com/joselitofilho/go-conventional-commits/pkg/transformers"
 )
 
 func TestTransforms_Messages(t *testing.T) {

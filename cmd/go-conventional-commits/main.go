@@ -11,9 +11,9 @@ import (
 	"github.com/akamensky/argparse"
 	"github.com/tsuyoshiwada/go-gitlog"
 
-	"github.com/joselitofilho/go-conventional-commits/internal/changelogs"
-	"github.com/joselitofilho/go-conventional-commits/internal/gitargs"
-	"github.com/joselitofilho/go-conventional-commits/internal/transformers"
+	"github.com/joselitofilho/go-conventional-commits/pkg/changelogs"
+	"github.com/joselitofilho/go-conventional-commits/pkg/gitargs"
+	"github.com/joselitofilho/go-conventional-commits/pkg/transformers"
 )
 
 func main() {

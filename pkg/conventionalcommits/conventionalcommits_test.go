@@ -5,7 +5,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/joselitofilho/go-conventional-commits/internal/conventionalcommits"
+	"github.com/joselitofilho/go-conventional-commits/pkg/conventionalcommits"
 	"github.com/stretchr/testify/require"
 )
 

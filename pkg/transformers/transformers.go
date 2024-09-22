@@ -5,9 +5,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/joselitofilho/go-conventional-commits/internal/changelogs"
-	"github.com/joselitofilho/go-conventional-commits/internal/common"
-	"github.com/joselitofilho/go-conventional-commits/internal/conventionalcommits"
+	"github.com/joselitofilho/go-conventional-commits/pkg/changelogs"
+	"github.com/joselitofilho/go-conventional-commits/pkg/common"
+	"github.com/joselitofilho/go-conventional-commits/pkg/conventionalcommits"
 	"github.com/tsuyoshiwada/go-gitlog"
 )
 

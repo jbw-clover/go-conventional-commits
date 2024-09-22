@@ -1,5 +1,12 @@
 # go-conventional-commits
 
+This is a hacked version of [github.com/joselitofilho/go-conventional-commits)](https://github.com/joselitofilho/go-conventional-commits). It has two main changes:
+
+1. Internal packages have been exported
+2. Basic support for git commit header to be prefixed with a list of issue references
+
+---
+
 This is a tool to parser your git commit messages into a change log message base on [Conventional Commits](#conventional-commits) specification.
 
 ## Conventional Commits

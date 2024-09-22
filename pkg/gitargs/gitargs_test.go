@@ -3,7 +3,7 @@ package gitargs_test
 import (
 	"testing"
 
-	"github.com/joselitofilho/go-conventional-commits/pkg/gitargs"
+	"github.com/jbw-clover/go-conventional-commits/pkg/gitargs"
 	"github.com/stretchr/testify/require"
 )
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/joselitofilho/go-conventional-commits/pkg/common"
+	"github.com/jbw-clover/go-conventional-commits/pkg/common"
 )
 
 // ChangeLogs a slice of parsed change log messages

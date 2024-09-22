@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/joselitofilho/go-conventional-commits/pkg/changelogs"
-	"github.com/joselitofilho/go-conventional-commits/pkg/transformers"
+	"github.com/jbw-clover/go-conventional-commits/pkg/changelogs"
+	"github.com/jbw-clover/go-conventional-commits/pkg/transformers"
 )
 
 func TestTransforms_ChangeLog_WithSimpleMessage(t *testing.T) {

@@ -12,7 +12,7 @@ type ConventionalCommits []*ConventionalCommit
 
 // ConventionalCommit a parsed conventional commit message
 type ConventionalCommit struct {
-	Issues      []string `json:"issues"`
+	Issues      []string `json:"issues,emitempty"`
 	Category    string   `json:"category"`
 	Scope       string   `json:"scope"`
 	Description string   `json:"description"`

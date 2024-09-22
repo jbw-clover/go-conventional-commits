@@ -5,9 +5,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/joselitofilho/go-conventional-commits/pkg/changelogs"
-	"github.com/joselitofilho/go-conventional-commits/pkg/common"
-	"github.com/joselitofilho/go-conventional-commits/pkg/conventionalcommits"
+	"github.com/jbw-clover/go-conventional-commits/pkg/changelogs"
+	"github.com/jbw-clover/go-conventional-commits/pkg/common"
+	"github.com/jbw-clover/go-conventional-commits/pkg/conventionalcommits"
 	"github.com/tsuyoshiwada/go-gitlog"
 )
 
@@ -18,17 +18,21 @@ var (
 )
 
 // TransformConventionalCommit takes a commits message and parses it into usable blocks
-func TransformConventionalCommit(message string) (commit *conventionalcommits.ConventionalCommit) {
-	match := baseFormatRegex.FindStringSubmatch(message)
+func TransformConventionalCommit(message string, issueExtractor func(string) ([]string, string)) (commit *conventionalcommits.ConventionalCommit) {
+	parts := strings.SplitN(message, "\n", 2)
+	parts = append(parts, "")
 
+	issues, msgRemainder := issueExtractor(parts[0])
+	msgBody := parts[1]
+
+	match := baseFormatRegex.FindStringSubmatch(strings.Join([]string{msgRemainder, msgBody}, "\n"))
 	if len(match) == 0 {
-		parts := strings.SplitN(message, "\n", 2)
-		parts = append(parts, "")
 		return &conventionalcommits.ConventionalCommit{
+			Issues:      issues,
 			Category:    "chore",
-			Major:       strings.Contains(parts[1], "BREAKING CHANGE"),
-			Description: strings.TrimSpace(parts[0]),
-			Body:        strings.TrimSpace(parts[1]),
+			Major:       strings.Contains(msgBody, "BREAKING CHANGE"),
+			Description: msgRemainder,
+			Body:        strings.TrimSpace(msgBody),
 		}
 	}
 
@@ -52,7 +56,7 @@ func TransformConventionalCommit(message string) (commit *conventionalcommits.Co
 
 	var footers []string
 	for _, v := range strings.Split(result["footer"], "\n") {
-		//v = strings.TrimSpace(v)
+		// v = strings.TrimSpace(v)
 		if !footerFormatRegex.MatchString(v) && len(footers) > 0 {
 			footers[len(footers)-1] += fmt.Sprintf("\n%s", v)
 			continue
@@ -72,6 +76,7 @@ func TransformConventionalCommit(message string) (commit *conventionalcommits.Co
 	}
 
 	commit = &conventionalcommits.ConventionalCommit{
+		Issues:      issues,
 		Category:    result["category"],
 		Scope:       result["scope"],
 		Major:       result["breaking"] == "!" || strings.Contains(result["footer"], "BREAKING CHANGE"),
@@ -101,16 +106,20 @@ func TransformConventionalCommit(message string) (commit *conventionalcommits.Co
 	return commit
 }
 
+func NullIssuesParser(message string) ([]string, string) {
+	return make([]string, 0), message
+}
+
 func TransformConventionalCommits(messages []string) (commits conventionalcommits.ConventionalCommits) {
 	for _, message := range messages {
-		commits = append(commits, TransformConventionalCommit(message))
+		commits = append(commits, TransformConventionalCommit(message, NullIssuesParser))
 	}
 	return
 }
 
 // TransformChangeLog takes a commits message and parses it into change log blocks
 func TransformChangeLog(message, projectLink string) *changelogs.ChangeLog {
-	commit := TransformConventionalCommit(message)
+	commit := TransformConventionalCommit(message, NullIssuesParser)
 
 	desc := commit.Description
 	ref := ""

@@ -1,4 +1,4 @@
-module github.com/joselitofilho/go-conventional-commits
+module github.com/jbw-clover/go-conventional-commits
 
 go 1.17
 

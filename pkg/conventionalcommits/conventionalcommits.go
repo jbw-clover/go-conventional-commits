@@ -30,3 +30,21 @@ func (cc *ConventionalCommit) String() string {
 	}
 	return string(data)
 }
+
+func (cc ConventionalCommits) IsMajor() bool {
+	for _, c := range cc {
+		if c.Major {
+			return true
+		}
+	}
+	return false
+}
+
+func (cc ConventionalCommits) IsMinor() bool {
+	for _, c := range cc {
+		if c.Minor {
+			return true
+		}
+	}
+	return false
+}

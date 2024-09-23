@@ -48,3 +48,12 @@ func (cc ConventionalCommits) IsMinor() bool {
 	}
 	return false
 }
+
+func (cc ConventionalCommits) IsPatch() bool {
+	for _, c := range cc {
+		if c.Patch {
+			return true
+		}
+	}
+	return false
+}
